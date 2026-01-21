@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <style media="screen">
+      table.redTable {
+      border: 2px solid #607d8b;
+      background-color: #EEE7DB;
+      width: 100%;
+      text-align: center;
+      border-collapse: collapse;
+      }
+      
+      table.redTable td, table.redTable th {
+      border: 1px solid #AAAAAA;
+      padding: 3px 2px;
+      }
+
+      table.redTable tbody td {
+      font-size: 13px;
+      }
+
+      table.redTable tr:nth-child(even) {
+      background: #ffffff;
+      }
+
+      table.redTable thead {
+      background: #607d8b;
+      }
+
+      table.redTable thead th {
+      font-size: 19px;
+      font-weight: bold;
+      color: #FFFFFF;
+      text-align: center;
+      border-left: 2px solid #607d8b;
+      }
+
+      table.redTable thead th:first-child {
+      border-left: none;
+      }
+
+      table.redTable tfoot {
+      font-size: 13px;
+      font-weight: bold;
+      color: #FFFFFF;
+      background: #607d8b;
+      }
+
+      table.redTable tfoot td {
+      font-size: 13px;
+      }
+
+      table.redTable tfoot .links {
+      text-align: right;
+      }
+
+      table.redTable tfoot .links a{
+      display: inline-block;
+      background: #FFFFFF;
+      color: #607d8b;
+      padding: 2px 8px;
+      border-radius: 5px;
+      }
+
+      .btn-dlt-edt{
+        display:flex;
+        justify-content: space-between;
+      }
+
+      /* Apply styles to the entire alert section */
+      .alert-sec {
+        background-color: #f8d7da;
+        color: #721c24;
+        padding: 20px;
+        margin: 100px;
+        text-align: center;
+      }
+
+      /* Style the heading inside the alert */
+      .alert-sec h1 {
+        font-size: 24px; 
+        margin-bottom: 10px; 
+      }
+
+      .button-row {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: silver;
+        padding: 5px;
+        margin-top: 10px;
+        }
+    
+        .fancy-button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+    
+        .fancy-button:hover {
+        background-color: #2980b9;
+        }
+    
+        /* Increase row height slightly more than button height */
+        .button-row {
+        min-height: calc(2px + 2 * 10px + 2 * 8px + 2 * 3px);
+        }
+
+    </style>
+  </head>
+  <body>
+    {% include "library/navbaradmin.html" %}
+    <br>
+    <br>
+    <div class="button-row">
+      <a href="{% url 'view_pendingbooks' %}"><button class="fancy-button" >Manage Book Issues</button></a>
+      <a href="{% url 'view_return_request' %}"><button class="fancy-button">Manage Book Returns</button></a>
+      <button class="fancy-button">Extend Book Borrowing</button>
+    </div>
+    <br>
+    {% if return_requested_book %}
+      <h3 class="p-3 mb-2 bg-success text-white" style='font-size: 30px;text-align:center;'>Pending Books For Return Approval</h3>
+      <br>
+      <div class="container">
+        <table class="table table-hover table-condensed table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Book Name</th>
+              <th>ISBN</th>
+              <th>Author</th>
+              <th>Category</th>
+              <th>Requested By</th>
+              <th>Student ID</th>
+              <th>Deparment</th>
+              <th>Session</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <td colspan="4" rowspan="4">
+                <div class="links"></div>
+              </td>
+            </tr>
+          </tfoot>
+          <tbody>
+            {% for book in return_requested_book %}
+              <tr>
+                <td>{{ book.name }}</td>
+                <td>{{ book.isbn }}</td>
+                <td>{{ book.author }}</td>
+                <td>{{ book.category }}</td>
+                <td>{{ book.requested_by.get_name }}</td>
+                <td>{{ book.requested_by.student_id }}</td>
+                <td>{{ book.requested_by.department_name }}</td>
+                <td>{{ book.requested_by.session }}</td>
+                <td>{{ book.status }}</td>
+                <td>
+                  <div class=btn-dlt-edt>
+                    <form action="{% url 'approve_return_request' %}" method="POST">
+                      {% csrf_token %}
+                      <input type="hidden" name="book_id" value="{{ book.pk }}">
+                      {% comment %} <input type="hidden" name="student_id" value="{{ book.requested_by.student_id }}"> {% endcomment %}
+                      {% comment %} <input type="hidden" name="isbn" value="{{ book.isbn }}"> {% endcomment %}
+                      <button type="submit" class="btn btn-primary">Approve</button>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+        <div class='alert-sec'>
+         <h1>No Return Requested Book.</h1>
+        </div>
+    {% endif %}
+    <br><br><br><br><br><br><br><br><br>
+    {% include "library/footer.html" %}
+  </body>
+  
+</html>

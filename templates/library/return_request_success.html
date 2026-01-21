@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <style media="screen">
+
+            /* Apply styles to the entire success section */
+            .success-sec {
+              background-color: #d4edda;
+              color: #155724; 
+              padding: 20px; 
+              text-align: center; 
+              margin: 100px;
+            }
+
+            /* Style the heading inside the success message */
+            .success-sec h1 {
+              font-size: 24px; 
+              margin-bottom: 10px; 
+            }
+
+            /* Style the "Borrow more" link inside the success message */
+            .success-sec a {
+              display: inline-block; 
+              background-color: #198754; 
+              color: #fff; 
+              padding: 10px 20px; 
+              border-radius: 5px; 
+              text-decoration: none; 
+            }
+
+            /* Change link color when hovered */
+            .success-sec a:hover {
+              background-color: #146c43; 
+            }
+
+        </style>
+    </head>
+    <body>
+        {% include "library/navbaradmin.html" %}
+            <div class='success-sec'>
+                <h1>Book Return request success</h1>
+                <a href="viewissuedbookbystudent">Return more</a>
+            </div>
+        {% include "library/footer.html" %}
+    </body>
+</html>
+

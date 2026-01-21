@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <style media="screen">
+
+            /* Apply styles to the entire alert section */
+            .alert-sec {
+              background-color: #f8d7da;
+              color: #721c24;
+              padding: 20px;
+              margin: 100px;
+              text-align: center;
+            }
+
+            /* Style the heading inside the alert */
+            .alert-sec h1 {
+              font-size: 24px; 
+              margin-bottom: 10px; 
+            }
+
+            /* Style the "Try again" link inside the alert */
+            .alert-sec a {
+              display: inline-block; 
+              background-color: #dc3545; 
+              color: #fff; 
+              padding: 10px 20px; 
+              border-radius: 5px; 
+              text-decoration: none; 
+            }
+
+            /* Change link color when hovered */
+            .alert-sec a:hover {
+              background-color: #c82333; 
+            }
+
+        </style>
+    </head>
+    <body>
+        {% include "library/navbaradmin.html" %}
+        <br><br><br><br><br><br><br><br>
+            <div class='alert-sec'>
+                <h1>Book borrow request failed try bagain</h1>
+                <a href="viewbook_by_student">Try again</a>
+            </div>
+        {% include "library/footer.html" %}
+    </body>
+</html>

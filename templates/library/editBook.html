@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GSSC LMS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+
+    <style type="text/css">
+    	body{
+    		color: #aa082e;
+    		background-color: #b6bde7 !important;
+    		font-family: 'Roboto', sans-serif;
+    	}
+        /* Add your custom CSS styles here */
+
+        .container{
+            margin-top: 100px;
+        }
+
+        .title-edit{
+            text-align: center;
+        }
+
+        .edit-form {
+            width: 60%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .edit-form label {
+            font-weight: bold;
+        }
+        
+        .edit-form input[type="text"],
+        .edit-form input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        
+        .btn-update {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .spacer {
+            height: 100px; /* Space below the form */
+        }
+        
+    </style>
+
+
+  </head>
+  <body>
+    {% include "library/navbaradmin.html" %}
+    <div class="container">
+        <form method="post" class="edit-form">
+            {% csrf_token %}
+            <h1 class='title-edit'>Edit Book Details</h1>
+            <label for="name">Book Name:</label>
+            <input type="text" name="name" value="{{ book.name }}"><br>
+            
+            <label for="isbn">ISBN:</label>
+            <input type="text" name="isbn" value="{{ book.isbn }}"><br>
+            
+            <label for="author">Author:</label>
+            <input type="text" name="author" value="{{ book.author }}"><br>
+            
+            <label for="category">Category:</label>
+            <input type="text" name="category" value="{{ book.category }}"><br>
+            
+            <label for="publication_name">Publication Name:</label>
+            <input type="text" name="publication_name" value="{{ book.publication_name }}"><br>
+            
+            <label for="publication_date">Publication Date:</label>
+            <input type="date" name="publication_date" value="{{ book.publication_date|date:'Y-m-d' }}"><br>
+            
+            <label for="edition">Edition:</label>
+            <input type="text" name="edition" value="{{ book.edition }}"><br>
+
+            <button type="submit" class="btn-update">Update</button>
+        </form>
+    </div>
+    <div class="spacer"></div>
+    {% include "library/footer.html" %}
+</body>
+</html>

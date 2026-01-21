@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <style media="screen">
+
+            /* Apply styles to the entire alert section */
+            .alert-sec {
+              background-color: #f8d7da;
+              color: #721c24;
+              padding: 20px;
+              margin: 100px;
+              text-align: center;
+            }
+
+            /* Style the heading inside the alert */
+            .alert-sec h1 {
+              font-size: 54px; 
+              margin-bottom: 10px; 
+            }
+
+        </style>
+    </head>
+    <body>
+        {% include "library/navbarstudent.html" %}
+        <br><br><br><br><br><br><br><br>
+            <div class='alert-sec'>
+                <h1>Book Issue Approval Failed</h1>
+            </div>
+        {% include "library/footer.html" %}
+    </body>
+</html>
